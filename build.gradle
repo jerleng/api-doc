@@ -12,8 +12,8 @@ buildscript {
     }
 }
 
-version "0.1"
-group "apidoc"
+version "3.0.0-SNAPSHOT"
+group "com.bertramlabs"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -59,17 +59,64 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 }
+
+/*
+bintray {
+    publications = ['maven']
+    pkg {
+        githubRepo = 'jerleng/grails-api-doc' //Optional Github repository
+        githubReleaseNotesFile = 'Readme.md' //Optional Github readme file
+        repo = 'grails3-plugins'
+        userOrg = 'bertramlabs'
+        licenses = ['Apache-2.0']
+    }
+}
+
+grailsPublish {
+    if(project.hasProperty('bintrayUser')) {
+        user = bintrayUser
+        key = bintrayKey
+    }
+    userOrg = 'bertramlabs'
+    githubSlug = 'jerleng/grails-api-doc'
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "API Documentation Web Site"
+    desc = "Generate an integract documentation web site based on annotations or JSON"
+    developers = [bdwheeler: "Brian Wheeler", jsaardchit: "Jordon Saardchit", davidestes:"David Estes", jleng: "Jeremy Leng"]
+}
+*/
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "http://nexus.bertramlabs.com/content/repositories/publicSnapshots"
+            if(gradle.ext.labsNexusUser) {
+                credentials {
+                    username = gradle.ext.labsNexusUser
+                    password = gradle.ext.labsNexusPassword
+                }
+            }
+        }
+    }
+}
 grailsPublish {
     // TODO: Provide values here
     user = 'user'
     key = 'key'
-    githubSlug = 'foo/bar'
+    githubSlug = 'jerleng/grails-api-doc'
     license {
         name = 'Apache-2.0'
     }
-    title = "My Plugin"
-    desc = "Full plugin description"
-    developers = [johndoe:"John Doe"]
+    title = "API Documentation Web Site"
+    desc = "Generate an integract documentation web site based on annotations or JSON"
+    developers = [jerleng: "Jeremy Leng"]
     portalUser = ""
     portalPassword = ""    
 }
