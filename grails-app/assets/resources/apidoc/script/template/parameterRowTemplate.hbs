@@ -1,0 +1,48 @@
+{{#if this.show}}
+<tr>
+	<td style="width:50%;">
+		<h4><span class="label label-primary">{{this.name}}</span></h4>
+	{{#if this.description}}
+		<div style="padding-left:8px">{{this.description}}</div>
+	{{/if}}
+	{{#if warnings}}
+	<div class="text-warning" style="padding-left:8px">
+	<small>
+		<strong>Warnings:</strong>
+		<ul class="list-unstyled">{{#each warnings}} <li>{{this}}</li> {{/each}}</ul>
+	</small>
+	</div>
+	{{/if}}
+	{{#if hints}}
+	<div class="text-info" style="padding-left:8px">
+	<small>
+		<strong>Hints:</strong>
+		<ul class="list-unstyled">{{#each hints}} <li>{{this}}</li> {{/each}}</ul>
+	</small>
+	</div>
+	{{/if}}
+	</td>
+	<td>
+	<table>
+	<tr><th>Type:</th><td><h5 style="display:inline"><span class="label label-info">{{this.typeInfo.label}}</span></h5></td></tr>
+	<tr><th>Required:</th><td>{{toString this.required}}</td></tr>
+	<tr><th>Allow Multiple:</th><td>{{toString this.allowMultiple}}</td></tr>
+{{#if this.allowedValues}}
+	<tr><th>Allowed values:</th><td>{{this.allowedValues}}</td></tr>
+{{/if}}
+{{#if this.format}}
+	<tr><th>Format:</th><td>{{this.format}}</td></tr>
+{{/if}}
+{{#if this.defaultValue}}
+	<tr><th>Default Value:</th><td>{{this.defaultValue}}</td></tr>
+{{/if}}
+{{#if this.sinceVersion}}
+	<tr><td colspan="2"><h5><span class="label label-info">Since version {{sinceVersion}}</span></h5></td></tr>
+{{/if}}
+{{#if this.untilVersion}}
+	<tr><td colspan="2"><h5><span class="label label-warning">Until version {{untilVersion}}</span></h5></td></tr>
+{{/if}}
+	</table>
+	</td>
+</tr>
+{{/if}}

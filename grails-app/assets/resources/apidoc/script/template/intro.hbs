@@ -1,0 +1,17 @@
+<h2 class="apidoc-title" style="margin-top:0">{{doc.apiDocTitle}}</h2>
+<h4 class="apidoc-overview-title" style="text-transform: uppercase;"><g:message code="apidoc.introductionTitle"/></h4>
+<p>{{doc.introMessage}}</p>
+{{> resources doc}}
+{{#if doc.updates}}
+<div class="well well-sm" style="margin-top:20px">
+<h4 class="apidoc-updates-title text-primary" style="text-transform: uppercase;"><g:message code="apidoc.latestUpdatesTitle"/></h4>
+{{#each doc.updates}}
+	<ul class="list-unstyled">
+		<li style="text-transform: uppercase;font-weight:bold">Version {{version}}</li>
+		{{#each messages}}
+			<li>{{this}}</li>
+		{{/each}}
+	</ul>
+{{/each}}
+{{/if}}
+</div>

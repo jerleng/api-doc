@@ -1,0 +1,69 @@
+{{> apiHeader}}
+<h4>Fields</h4>
+<table class="table table-condensed table-striped table-bordered" style="table-layout: fixed;">
+	{{#if allowedValues}}
+		<tr><td></td><td>Allowed values: {{allowedValues}}</td></tr>
+	{{/if}}
+	{{#if fields}}
+	{{#each fields}}
+	<tr>
+		<td style="width:50%;">
+			<h4><span class="label label-primary">{{this.name}}</span></h4>
+		{{#if this.description}}
+			<div style="padding-left:8px">{{this.description}}</div>
+		{{/if}}
+		{{#if warnings}}
+		<div class="text-warning" style="padding-left:8px">
+			<strong>Warnings:</strong>
+			<ul class="list-unstyled">
+			{{#each warnings}} <li>{{this}}</li> {{/each}}
+			</ul>
+		</div>
+		{{/if}}
+		{{#if hints}}
+		<div class="text-info" style="padding-left:8px">
+			<strong>Hints:</strong>
+			<ul class="list-unstyled">
+			{{#each hints}} <li>{{this}}</li> {{/each}}
+			</ul>
+		</div>
+		{{/if}}
+		</td>
+		<td>
+
+	<table>
+	<tr><th>Type:</th><td>
+			{{#if typeInfo.ref}}
+			<a class="apidoc-link"  data-ref="{{typeInfo.ref}}" rel="object">
+			<button class="btn-xs btn-success">{{typeInfo.label}}</button>
+			</a>
+			{{else}}
+			<h5><span class="label label-info">{{this.typeInfo.label}}</span></h5>
+			{{/if}}
+	</td></tr>
+{{#unless readOnly}}
+	<tr><th>Required:</th><td>{{toString this.required}}</td></tr>
+{{/unless}}
+	<tr><th>Read-Only:</th><td>{{toString this.readOnly}}</td></tr>
+{{#if this.allowedValues}}
+	<tr><th>Allowed values:</th><td>{{this.allowedValues}}</td></tr>
+{{/if}}
+{{#if this.format}}
+	<tr><th>Format:</th><td>{{this.format}}</td></tr>
+{{/if}}
+{{#if this.defaultValue}}
+	<tr><th>Default Value:</th><td>{{this.defaultValue}}</td></tr>
+{{/if}}
+{{#if this.sinceVersion}}
+	<tr><td colspan="2"><h5><span class="label label-info">Since version {{sinceVersion}}</span></h5></td></tr>
+{{/if}}
+{{#if this.untilVersion}}
+	<tr><td colspan="2"><h5><span class="label label-warning">Until version {{untilVersion}}</span></h5></td></tr>
+{{/if}}
+	</table>
+
+		</td>
+	</tr>
+	{{/each}}
+	{{/if}}
+</table>

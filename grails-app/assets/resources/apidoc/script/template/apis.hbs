@@ -1,0 +1,26 @@
+{{#if apis}}
+<div id="accordion" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+{{#eachInMap apis}}
+		{{#if key}}
+		<div style="text-transform: uppercase;margin-top:5px;">{{key}}</div>
+		{{else}}
+		<div style="text-transform: uppercase;margin-top:5px;">General</div>
+		{{/if}}
+		{{#each value}}
+		<div class="panel" style="box-shadow:none">
+			<a title="{{description}}" class="apidoc-link" style="box-shadow:none;margin-bottom:0px;"  data-ref="{{ref}}" rel="api" data-toggle="collapse" data-target="#method-{{ref}}" data-parent="#accordion" aria-controls="method-{{ref}}">{{name}}</a>
+			<div class="panel-collapse collapse {{ref}}" id="method-{{ref}}" role="tabpanel">
+				<ul class="list-unstyled" style="padding-left:10px;" >
+				{{#each methods}}
+					<li><small><a title="{{description}}" class="apidoc-link" data-api-ref="{{../ref}}" data-ref="{{ref}}" rel="method">{{name}}</a></small></li>
+				{{/each}}
+				</ul>
+			</div>
+		</div>
+		{{/each}}
+	</ul>
+{{/eachInMap}}
+</div>
+{{else}}
+<p>No api documented</p>
+{{/if}}

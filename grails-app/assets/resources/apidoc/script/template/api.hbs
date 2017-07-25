@@ -1,0 +1,20 @@
+{{> apiHeader}}
+<div style="margin-top:10px">
+	<h4 style="text-transform: uppercase;">Methods</h4>
+	{{#methods}}
+	<div class="panel panel-default">
+		<div class="panel-heading" id="{{ref}}">
+			<h4>
+				{{#each verbs}}<span class="label pull-right {{this}}" style="margin-left:5px">{{this}}</span>{{/each}}
+				<a data-ref="{{ref}}" data-api-ref="{{../ref}}"  class="apidoc-link">
+					{{#if name}}{{name}}{{else}}{{path}}{{/if}}
+				</a>
+				<br/>
+				<small><em class="text-info">{{path}}</em></small>
+				<br/>
+				<small>{{description}}</small>
+			</h4>
+		</div>
+	</div>
+	{{/methods}}
+</div>

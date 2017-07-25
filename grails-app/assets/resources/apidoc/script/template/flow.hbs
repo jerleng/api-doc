@@ -1,0 +1,26 @@
+{{> apiHeader}}
+<div style="margin-top:10px">
+	<h4 style="text-transform: uppercase;">Flow Steps</h4>
+	{{#each methods}}
+	<div class="panel panel-default">
+		<div class="panel-heading" id="{{ref}}">
+			<h4 class="panel-title">
+				{{#each verbs}}<span class="label pull-right {{this}}" style="margin-left:5px">{{this}}</span>{{/each}}
+				<a data-ref="{{ref}}" data-api-ref="{{../ref}}"  class="apidoc-link">
+					{{#if name}}{{name}}{{else}}{{path}}{{/if}}
+				</a><br/>
+				<small>{{description}}</small>
+				{{#if notes}}
+				<div style="padding-top:10px">
+				<small>
+				<b>Notes:</b><br/>
+				<i> {{notes}}</i>
+				</small>
+				</div>
+				{{/if}}
+
+			</h4>
+		</div>
+	</div>
+	{{/each}}
+</div>

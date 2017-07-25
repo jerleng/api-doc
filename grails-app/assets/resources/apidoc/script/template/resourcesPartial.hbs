@@ -1,0 +1,75 @@
+{{#if descriptionImages}}
+{{#each descriptionImages}}
+<div class="apidoc-screenshot" style="margin-bottom:20px;">
+<figure>
+<img src="{{uri}}" style="max-width:100%;max-height:100%;"/>
+<figcaption>
+<em>{{title}}</em>
+<div><small>{{description}}</small></div>
+</figcaption>
+</figure>
+</div>
+{{/each}}
+{{/if}}
+	
+{{#if screenshots}}
+<h4 style="text-transform: uppercase;margin-top:20px;">Screenshots</h4>
+{{#each screenshots}}
+<div class="apidoc-screenshot" style="margin-bottom:20px;">
+<figure>
+<img src="{{uri}}" style="max-width:100%;max-height:100%;"/>
+<figcaption>
+<em>{{title}}</em>
+<div><small>{{description}}</small></div>
+</figcaption>
+</figure>
+</div>
+{{/each}}
+{{/if}}
+
+{{#if snippet}}
+<h4 style="text-transform: uppercase;margin-top:20px;">Sample Code</h4>
+<pre class="prettyprint" style="padding:5px;">
+{{snippet}}
+</pre>
+{{/if}}
+
+{{#if demoLinks}}
+<h4 style="text-transform: uppercase;margin-top:20px;">Demos</h4>
+{{#each demoLinks}}
+<div>
+<div><strong><a href="{{uri}}" target="_new">{{title}}</a></strong></div>
+<div><small>{{description}}</small></div>
+</div>
+{{/each}}
+{{/if}}
+
+{{#if downloadLinks}}
+<h4 style="text-transform: uppercase;margin-top:20px;">Downloads</h4>
+{{#each downloadLinks}}
+<div>
+<div><strong><a href="{{uri}}" target="_new">{{title}}</a></strong></div>
+<div><small>{{description}}</small></div>
+</div>
+{{/each}}
+{{/if}}
+
+{{#if authorLinks}}
+<h4 style="text-transform: uppercase;margin-top:20px;">Authors</h4>
+{{#each authorLinks}}
+<div>
+<div><strong><a href="{{uri}}" target="_new">{{title}}</a></strong></div>
+<div><small>{{description}}</small></div>
+</div>
+{{/each}}
+{{/if}}
+
+{{#if moreInfoLinks}}
+<h4 style="text-transform: uppercase;margin-top:20px;">More Info</h4>
+{{#each moreInfoLinks}}
+<div>
+<div><strong><a href="{{uri}}" target="_new">{{title}}</a></strong></div>
+<div><small>{{description}}</small></div>
+</div>
+{{/each}}
+{{/if}}

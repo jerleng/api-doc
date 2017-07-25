@@ -1,0 +1,240 @@
+<h3 style="margin-top:0px;margin-bottom:0px;text-transform: uppercase;">
+	<span>Playground</span>
+	<button class="btn btn-xs btn-primary pull-right hidden-xs hidden-sm" id="playground-max-btn">
+	<i class="glyphicon glyphicon-triangle-left"></i>
+	</button>
+</h3>
+<div class="row">
+	<div class="col-md-12">
+		<h4 style="margin-bottom:10px;">Base URL</h4>
+		<div class="form-group" style="margin-bottom:5px;">
+		<input id="basePathField" class="form-control parameter-field" placeholder="Base URL" name="basePath"/>
+		</div>
+	</div>
+</div>
+<div class="row">
+	{{#if auth}}
+		{{#contains auth.type "Basic Auth" true}}
+			<div class="col-md-12">
+				<h4>Basic Authentication</h4>
+				<div class="form-group" style="margin-bottom:5px;">
+					<label for="basicAuthUsername">Username</label>
+					<input class="form-control parameter-field" type="text" id="basicAuthUsername" name="basicAuthUsername" placeholder="Username" data-parameter-type="header">
+				</div>
+				<div class="form-group">
+					<label for="basicAuthPassword">Password</label>
+					<input class="form-control parameter-field" type="password" id="basicAuthPassword" name="basicAuthPassword" placeholder="Password" data-parameter-type="header">
+				</div>
+			</div>
+		{{/contains}}
+	{{/if}}
+	{{#if headers}}
+	<div class="col-md-12">
+		<div id="headers">
+			<h4>Headers</h4>
+			{{#headers}}
+				<div class="form-group">
+					<label for="i_{{name}}">{{name}}</label>					
+					{{#compare allowedValues.length 1 operator="=="}}
+						<input type="text" class="form-control parameter-field" name="{{name}}" placeholder="{{name}}" value="{{allowedValues}}" data-parameter-type="header"/>
+					{{/compare}}
+					{{#compare allowedValues.length 1 operator="!="}}
+						<input type="text" class="form-control parameter-field" name="{{name}}" placeholder="{{name}}" data-parameter-type="header"/>
+					{{/compare}}
+				</div>
+			{{/headers}}
+		</div>
+	</div>
+	{{/if}}
+	{{#if request}}
+	{{#if consumes}}
+		<div class="col-md-6" style="margin-left:0px">		
+		<div id="consumes" class="playground-spacer">
+		<h4>Request type</h4>	 
+		{{#consumes}}
+			<div><label><input type="radio" name="consumes" value="{{this}}"> {{this}}</label></div>
+		{{/consumes}}
+		</div>
+		</div>
+	{{/if}}
+	{{/if}}
+	{{#if produces}}
+		<div class="col-md-6" style="margin-left:0px">		
+		<div id="produces" class="playground-spacer">
+		<h4>Response Type</h4> 
+		{{#produces}}
+			<div><label><input type="radio" name="produces" value="{{this}}"> {{this}}</label></div>
+		{{/produces}}
+		</div>
+		</div>
+	{{/if}}
+	<div class="col-md-12">
+		<div id="validationerrors" class="alert alert-danger" style="display:none">
+			<strong>Validation errors:</strong>
+			<ul class="list-unstyled"></ul>
+		</div>
+	</div>
+	{{#if pathparameters}}
+	<div class="col-md-12">
+		<div id="pathparameters" class="playground-spacer">
+			<h4>Path parameters</h4>
+			{{#pathparameters}}
+				<div class="form-group">
+					<label class="control-label" for="i_{{name}}">{{name}}</label>
+					{{#if defaultValue}}
+					<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{name}}" data-parameter-type="path" data-method-ref="{{../ref}}" value="{{defaultValue}}"/>
+					{{else}}
+					<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{name}}" data-parameter-type="path" data-method-ref="{{../ref}}"/>
+					{{/if}}
+
+				</div>
+			{{/pathparameters}}
+		</div>
+	</div>
+	{{/if}}
+	{{#if queryparameters}}
+	<div class="col-md-12">
+		<div id="queryparameters" class="playground-spacer">
+			<h4>Query parameters</h4>
+			{{#queryparameters}}
+				<div class="form-group">
+					<label for="i_{{name}}">{{name}}</label>
+					{{#compare required true operator="=="}}
+						{{#compare allowedValues.length 1 operator="=="}}
+							{{#if defaultValue}}
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{defaultValue}}" value="{{allowedValues}}" value="{{defaultValue}}" required="true" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							{{else}}
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="required" value="{{allowedValues}}" required="true" data-parameter-type="query" data-method-ref="{{../ref}}"/>
+							{{/if}}
+						{{/compare}}
+						{{#compare allowedValues.length 1 operator="!="}}
+							{{#if defaultValue}}
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" value="{{defaultValue}}" placeholder="{{defaultValue}}" required ="true" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							{{else}}
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="required" required="true" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							{{/if}}
+						{{/compare}}						
+					{{/compare}}
+					{{#compare required false operator="=="}}
+						{{#compare allowedValues.length 1 operator="=="}}
+							{{#if defaultValue}}
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{defaultValue}}" value="{{allowedValues}}" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							{{else}}
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="optional" value="{{allowedValues}}" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							{{/if}}
+						{{/compare}}
+						{{#compare allowedValues.length 1 operator="!="}}
+							{{#if defaultValue}}
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" value="{{defaultValue}}" placeholder="{{defaultValue}}" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							{{else}}
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="optional" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							{{/if}}
+						{{/compare}}
+					{{/compare}}
+				</div>
+			{{/queryparameters}}
+		</div>
+	</div>
+	{{/if}}
+	{{#if extraQueryString}}
+	<div class="col-md-12">
+		<h4>Extra query string</h4>
+		<div class="form-group">
+			<input type="text" class="form-control" id="extraQueryString" name="extraQueryString" placeholder="optional" data-parameter-type="extra-query-string"/>
+		</div>
+	</div>
+	{{/if}}
+	{{#if request}}
+	<div class="col-md-12">
+		<div id="request" class="playground-spacer">
+			<h4>Request Body</h4>
+			<div>
+			<textarea class="form-control" id="inputJson" rows=10 />
+			</div>
+			<div style="margin-top:10px;">
+				<button class="btn btn-xs btn-primary copy-button" data-source-id="inputJson" data-feedback-id="inputJson-copy-success">
+				<i class="glyphicon glyphicon-copy"></i>
+				</button>
+				<span class="text-success" id="inputJson-copy-success" style="display:none">
+				Request body copied
+				</span>
+			</div>
+
+		</div>
+	</div>
+	{{/if}}
+	<div class="col-md-12 playground-spacer">
+		<button class="btn btn-primary col-md-12" id="testButton" data-loading-text="Loading...">Submit</button>
+	</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="tabbable" id="resInfo" style="display:none; margin-top: 20px;">
+	<ul class="nav nav-tabs">
+		<li class="active" id="responseTextTab"><a href="#responseTextTabPanel" data-toggle="tab" style="padding:6px" role="tab">Response text</a></li>
+		<li><a href="#tab3" data-toggle="tab" style="padding:6px" role="tab">Request info</a></li>
+		<li><a href="#tab2" data-toggle="tab" style="padding:6px" role="tab">Response info</a></li>
+	</ul>
+	<div class="tab-content" style="margin-top: 20px">
+		<div class="tab-pane active" id="responseTextTabPanel">
+			<div>
+				<pre id="response" class="prettyprint" style="height:400px;overflow:scroll;"></pre>
+			</div>
+			<div>
+				<button class="btn btn-xs btn-primary open-window-button hidden-xs hidden-sm" data-source-id="response" data-title="Agora API Response">
+				<i class="glyphicon glyphicon-new-window"></i>
+				</button>
+				<button class="btn btn-xs btn-primary copy-button" data-source-id="response" data-feedback-id="response-copy-success">
+				<i class="glyphicon glyphicon-copy"></i>
+				</button>
+				<span class="text-success" id="response-copy-success" style="display:none">
+				Response copied
+				</span>
+			</div>
+		</div>
+		<div class="tab-pane" id="tab2">
+			<h5 style="padding:0px">Response code</p>
+			<pre id="responseStatus" class="prettyprint"></pre>
+			<h5 style="padding:0px">Response headers</p>
+			<div>
+				<pre id="responseHeaders" class="prettyprint"></pre>
+			</div>
+			<div>
+				<button class="btn btn-xs btn-primary copy-button" data-source-id="responseHeaders" data-feedback-id="responseHeaders-copy-success">
+				<i class="glyphicon glyphicon-copy"></i>
+				</button>
+				<span class="text-success" id="responseHeaders-copy-success" style="display:none">
+				Response headers copied
+				</span>
+			</div>
+		</div>
+		<div class="tab-pane" id="tab3">
+			<h5 style="padding:0px">Request URL</p>
+			<pre id="requestURL" class="prettyprint"></pre>
+			<div>
+				<button class="btn btn-xs btn-primary copy-button" data-source-id="requestURL" data-feedback-id="requestURL-copy-success">
+				<i class="glyphicon glyphicon-copy"></i>
+				</button>
+				<span class="text-success" id="requestURL-copy-success" style="display:none">
+				Request URL copied
+				</span>
+			</div>
+
+			<h5 style="padding:0px">Request headers</p>
+			<div>
+				<pre id="requestHeaders" class="prettyprint"></pre>
+			</div>
+			<div>
+				<button class="btn btn-xs btn-primary copy-button" data-source-id="requestHeaders" data-feedback-id="requestHeaders-copy-success">
+				<i class="glyphicon glyphicon-copy"></i>
+				</button>
+				<span class="text-success" id="requestHeaders-copy-success" style="display:none">
+				Request headers copied
+				</span>
+			</div>
+
+		</div>
+	</div>
+</div>
+</div>

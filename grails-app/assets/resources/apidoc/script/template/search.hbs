@@ -1,0 +1,39 @@
+	<h2 class="apidoc-title" style="margin-top:0">Search Results</h2>
+{{#if results}}
+	<h4>
+	{{size}} API docs matched "{{query}}"
+	</h4>
+	<div  style="margin-bottom:10px;">
+	<span id="all-search-filter" class="label label-info search-filter" data-query="{{query}}" data-type="all">All</span>
+	<span id="api-search-filter" class="label label-info search-filter" data-query="{{query}}" data-type="api">APIs</span>
+	<span id="method-search-filter" class="label label-info search-filter" data-query="{{query}}" data-type="method">Methods</span>
+	<span id="object-search-filter" class="label label-info search-filter" data-query="{{query}}" data-type="object">Object</span>
+	<span id="flow-search-filter" class="label label-info search-filter" data-query="{{query}}" data-type="flow">Flows</span>
+	</div>
+
+	{{#each results}}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="api-badge pull-right">
+			<span class="label label-info" style="margin-left:5px;">{{type}}</span>
+			</h4>		
+			<h4>
+				<a data-ref="{{ref}}" data-query="{{../query}}" class="apidoc-link">
+					{{name}}
+				</a>
+				<br/>
+				<small>{{description}}</small>
+			</h4>
+		</div>
+	</div>
+	{{/each}}
+{{else}}
+	<h4>
+		{{#if query}}
+		No API docs contained "{{query}}"
+		{{else}}
+		Please enter a search term
+		{{/if}}
+	</h4>
+{{/if}}
+</div>

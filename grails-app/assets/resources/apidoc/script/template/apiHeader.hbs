@@ -1,0 +1,42 @@
+<h3 class="api-badge pull-right">
+{{#if untilVersion}}<span class="label label-danger" style="text-transform: uppercase;">Deprecated</span>{{/if}}
+{{#each verbs}}<span class="label {{this}}" style="margin-left:5px;">{{this}}</span>{{/each}}
+</h3>
+<h3 id="apiName" class="api-name">{{name}}</h3>
+{{#if apiName}}
+{{#if apiRef}}<a class="apidoc-link" data-ref="{{apiRef}}">{{/if}}
+<h4 style="margin-top:0px;margin-bottom:2px;"><em>{{apiName}} API</em></h4>
+{{#if apiRef}}</a>{{/if}}
+{{/if}}
+<div style="margin-top:0;margin-bottom:0px;padding:0">
+{{#if apiType}}<span class="label label-default">{{apiType}}</span>{{/if}}
+<span class="label label-info">Current <span id="version"></span></span>
+{{#if sinceVersion}}<span class="label label-info">Since {{sinceVersion}}</span>{{/if}}
+{{#if untilVersion}}<span class="label label-danger">Until {{untilVersion}}</span>{{/if}}
+</div>
+<div style="margin-top:0;margin-top:10px;"><span id="apiDescription">{{description}}</span></div>
+{{> resources}}
+{{#if preconditions}}
+<div class="alert alert-success border-radius-none">
+	<p><strong>Preconditions: </strong></p>
+	<ul class="list-unstyled">
+	{{#each preconditions}}<li>{{this}}</li>{{/each}}
+	</ul>
+</div>
+{{/if}}
+{{#if hints}}
+<div class="alert alert-info border-radius-none">
+	<p><strong>Hints:</strong></p>
+	<ul class="list-unstyled">
+	{{#each hints}} <li>{{this}}</li> {{/each}}
+	</ul>
+</div>
+{{/if}}
+{{#if warnings}}
+<div class="alert alert-warning border-radius-none">
+	<p><strong>Warnings:</strong></p>
+	<ul class="list-unstyled">
+	{{#each warnings}} <li>{{this}}</li> {{/each}}
+	</ul>
+</div>
+{{/if}}

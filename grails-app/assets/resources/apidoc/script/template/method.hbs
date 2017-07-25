@@ -1,0 +1,172 @@
+{{> apiHeader}}
+<div id="_{{ref}}" aria-labelledby="{{ref}}">
+	<h4>Request</h4>
+
+	<table class="table table-condensed table-striped table-bordered" style="table-layout: fixed; margin-top:15px;">
+		{{#if path}}
+		<tr><th colspan=2>Path</th></tr>
+		<tr><td colspan=2><h4 class="text-info">{{path}}</h4></td></tr>
+		{{/if}}
+		{{#if verbs}}
+		<tr>
+			<th style="width:50%;">HTTP Method</th>
+			<td>{{#each verbs}}<h4><span class="label verb {{this}}">{{this}}</span></h4>{{/each}}</td>
+		</tr>
+		{{/if}}
+		{{#if auth}}
+		<tr>
+			<th style="width:50%;">Auth</th>
+			<td>{{auth.type}}</td>
+		</tr>
+		{{/if}}
+		{{#if auth.roles}}
+		<tr>
+			<th style="width:50%;">Roles</th>
+			<td>{{auth.roles}}</td>
+		</tr>
+		{{/if}}
+		{{#if produces}}
+		<tr><th>Produces</th>
+		<td><h4>{{#each produces}} <span class="label label-danger">{{this}}</span> {{/each}}</h4></td></tr>
+		{{/if}}
+		{{#if consumes}}
+		<tr><th>Consumes</th>
+		<td><h4>{{#each consumes}} <span class="label label-danger">{{this}}</span> {{/each}}</h4></td></tr>
+		{{/if}}
+		{{#if headers}}
+		<tr><th colspan=2>Headers</tr>
+		{{#each headers}}
+		<tr>
+			<td style="width:50%;">
+				<code><big>{{this.name}}</big></code>
+			{{#if this.description}}
+				<div style="padding-left:8px">{{this.description}}</div>
+			{{/if}}
+			{{#if warnings}}
+			<div class="text-warning" style="padding-left:8px">
+				<small>
+				<strong>Warnings:</strong>
+				<ul class="list-unstyled">
+				{{#each warnings}} <li>{{this}}</li> {{/each}}
+				</ul>
+				<small>
+			</div>
+			{{/if}}
+			{{#if hints}}
+			<div class="text-info" style="padding-left:8px">
+			<small>
+				<strong>Hints:</strong>
+				<ul class="list-unstyled">
+				{{#each hints}} <li>{{this}}</li> {{/each}}
+				</ul>
+			</small>
+			</div>
+			{{/if}}
+			</td>
+			<td>
+		{{#if this.allowedValues}}
+			<div><label>Allowed values:</label> {{this.allowedValues}}</div>
+		{{/if}}
+		{{#if this.format}}
+			<div><label>Format:</label> {{this.format}}</div>
+		{{/if}}
+		{{#if this.defaultValue}}
+			<div><label>Default Value:</label> {{this.defaultValue}}</div>
+		{{/if}}
+		{{#if this.sinceVersion}}
+			<div><span class="label label-info">Since version {{sinceVersion}}</span></div>
+		{{/if}}
+		{{#if this.untilVersion}}
+			<div><span class="label label-warning">Until version {{untilVersion}}</span>{{this.untilVersion}}</div>
+		{{/if}}
+			</td>
+		</tr>
+		{{/each}}
+
+		{{/if}}
+	</table>
+		{{#if pathparameters}}
+		<h4>Path parameters</h4>
+	<table class="table table-condensed table-striped table-bordered" style="table-layout: fixed;">
+
+		{{#each pathparameters}}
+		{{> parameterRowTemplate}}
+		{{/each}}
+	</table>
+		{{/if}}
+		{{#if queryparameters}}
+		<h4>Query parameters</h4>
+	<table class="table table-condensed table-striped table-bordered" style="table-layout: fixed;">
+		{{#each queryparameters}}
+		{{> parameterRowTemplate}}
+		{{/each}}
+	</table>
+		{{/if}}
+		{{#if request}}
+		<h4>Body</h4>
+	<table class="table table-condensed table-striped table-bordered" style="table-layout: fixed;">
+		<tr><th>Body object</th>
+			<td>
+			{{#if request.typeInfo.isList}}<button class="btn-xs btn-success">List of </button>{{/if}}
+			{{#if request.typeInfo.wrapperObjectType}}
+				{{#if request.typeInfo.returnRef}}<a class="apidoc-link"  data-ref="{{request.typeInfo.returnRef}}" rel="object">{{/if}}
+				<button class="btn-xs btn-success">{{request.typeInfo.wrapperObjectType}}</button>{{#if request.typeInfo.returnRef}}</a>{{/if}}
+			{{/if}}
+			{{#each request.typeInfo.wrapperObjectTypeInfo}}
+				{{#if this.ref}}<a class="apidoc-link"  data-ref="{{this.ref}}" rel="object">{{/if}}
+				<button class="btn-xs btn-success"> {{this.type}}</button>{{#if this.ref}}</a>{{/if}}
+			{{/each}}
+			{{#if request.typeInfo.ref}}
+			<a class="apidoc-link"  data-ref="{{request.typeInfo.ref}}" rel="object">
+			{{/if}}
+			<button class="btn-xs btn-success"> {{request.typeInfo.type}}</button>
+			{{#if request.typeInfo.ref}}
+			</a>
+			{{/if}}
+			</td>
+		</tr>
+	</table>
+		{{/if}}
+		<h4>Response</h4>
+	<table class="table table-condensed table-striped table-bordered" style="table-layout: fixed;">
+		{{#if response}}
+		<tr><th style="width:50%;">Response object</th>
+			<td>
+			{{#if response.typeInfo.isList}}<button class="btn-xs btn-success">List of </button>{{/if}}
+			{{#if response.typeInfo.wrapperObjectType}}
+				{{#if response.typeInfo.returnRef}}<a class="apidoc-link"  data-ref="{{response.typeInfo.returnRef}}" rel="object">{{/if}}
+				<button class="btn-xs btn-success">{{response.typeInfo.wrapperObjectType}}</button>{{#if response.typeInfo.returnRef}}</a>{{/if}}
+			{{/if}}
+			{{#each response.typeInfo.wrapperObjectTypeInfo}}
+				{{#if this.ref}}<a class="apidoc-link"  data-ref="{{this.ref}}" rel="object">{{/if}}
+				<button class="btn-xs btn-success"> {{this.type}}</button>{{#if this.ref}}</a>{{/if}}
+			{{/each}}
+			{{#if response.typeInfo.ref}}
+			<a class="apidoc-link"  data-ref="{{response.typeInfo.ref}}" rel="object">
+			{{/if}}
+			<button class="btn-xs btn-success"> {{response.typeInfo.type}}</button>
+			{{#if response.typeInfo.ref}}
+			</a>
+			{{/if}}
+			</td>
+		</tr>
+		{{/if}}
+		{{#if responseCode}}
+		<tr>
+			<th style="width:50%;">Response status code</th>
+			<td><h4><span class="label label-info response-code">{{responseCode}}</span></h4></td>
+		</tr>
+		{{/if}}
+	</table>
+		{{#if apiErrors}}
+		<h4>Errors</h4>
+	<table class="table table-condensed table-striped table-bordered" style="table-layout: fixed;">
+		{{#each apiErrors}}
+			<tr>
+				<td><h4><span class="label label-warning response-code">{{this.code}}</span></h4></td>
+				<td>{{this.description}}</td>
+			</tr>
+		{{/each}}
+	</table>
+		{{/if}}
+</div>
