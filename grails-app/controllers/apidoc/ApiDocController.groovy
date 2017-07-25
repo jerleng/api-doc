@@ -49,10 +49,14 @@ class ApiDocController {
 		JSON_PAYLOAD = new JSON(result).toString(true)
 	}
 
+	def index() {
+		redirect uri:g.assetPath(src: '/apidoc/index.html'), permanent:true
+	}
+
 	def data() {
 		if (grails.util.Holders.grailsApplication.config.apidoc.useAssetsDoc == true) {
 			log.info('API Docs using /apidoc/data/apiDocObj.js')
-			redirect uri:g.assetPath(src: '/apidoc/data/apiDocObj.js'), contentType:'text/javascript'
+			redirect uri:g.assetPath(src: '/apidoc/data/apiDocObj.js')
 			return
 		}
 
@@ -114,7 +118,7 @@ class ApiDocController {
 				render text:payloadStr, contentType:'text/xml'
 				break
 			case 'text':
-				def payloadStr = rtn.data[params.id+'s'].collect{it.name+':'+it.description}.join('\n')
+				def payloadStr = rtn.data[params.id+'s'].collect{'Name: '+it.name+'\nDescription: '+it.description+'\n====\n\n'}
 				request["Response-Content-Length"] = payloadStr.length()
 				render text:payloadStr, contentType:'text/plain'
 				break

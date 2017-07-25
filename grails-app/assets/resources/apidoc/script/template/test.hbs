@@ -82,9 +82,9 @@
 				<div class="form-group">
 					<label class="control-label" for="i_{{name}}">{{name}}</label>
 					{{#if defaultValue}}
-					<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{name}}" data-parameter-type="path" data-method-ref="{{../ref}}" value="{{defaultValue}}"/>
+					<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{name}}" data-parameter-type="path" data-method-ref="{{../../ref}}" value="{{defaultValue}}"/>
 					{{else}}
-					<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{name}}" data-parameter-type="path" data-method-ref="{{../ref}}"/>
+					<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{name}}" data-parameter-type="path" data-method-ref="{{../../ref}}"/>
 					{{/if}}
 
 				</div>
@@ -102,32 +102,32 @@
 					{{#compare required true operator="=="}}
 						{{#compare allowedValues.length 1 operator="=="}}
 							{{#if defaultValue}}
-							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{defaultValue}}" value="{{allowedValues}}" value="{{defaultValue}}" required="true" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{defaultValue}}" value="{{allowedValues}}" value="{{defaultValue}}" required="true" data-parameter-type="query" data-method-ref="{{../../ref}}"/>
 							{{else}}
-							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="required" value="{{allowedValues}}" required="true" data-parameter-type="query" data-method-ref="{{../ref}}"/>
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="required" value="{{allowedValues}}" required="true" data-parameter-type="query" data-method-ref="{{../../ref}}"/>
 							{{/if}}
 						{{/compare}}
 						{{#compare allowedValues.length 1 operator="!="}}
 							{{#if defaultValue}}
-							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" value="{{defaultValue}}" placeholder="{{defaultValue}}" required ="true" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" value="{{defaultValue}}" placeholder="{{defaultValue}}" required ="true" data-parameter-type="query" data-method-ref="{{../../ref}}"/>
 							{{else}}
-							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="required" required="true" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="required" required="true" data-parameter-type="query" data-method-ref="{{../../ref}}"/>
 							{{/if}}
 						{{/compare}}						
 					{{/compare}}
 					{{#compare required false operator="=="}}
 						{{#compare allowedValues.length 1 operator="=="}}
 							{{#if defaultValue}}
-							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{defaultValue}}" value="{{allowedValues}}" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="{{defaultValue}}" value="{{allowedValues}}" data-parameter-type="query" data-method-ref="{{../../ref}}"/>
 							{{else}}
-							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="optional" value="{{allowedValues}}" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="optional" value="{{allowedValues}}" data-parameter-type="query" data-method-ref="{{../../ref}}"/>
 							{{/if}}
 						{{/compare}}
 						{{#compare allowedValues.length 1 operator="!="}}
 							{{#if defaultValue}}
-							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" value="{{defaultValue}}" placeholder="{{defaultValue}}" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" value="{{defaultValue}}" placeholder="{{defaultValue}}" data-parameter-type="query" data-method-ref="{{../../ref}}"/>
 							{{else}}
-							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="optional" data-parameter-type="query" data-method-ref="{{../ref}}/>
+							<input type="text" class="form-control parameter-field" id="i_{{name}}" name="{{name}}" placeholder="optional" data-parameter-type="query" data-method-ref="{{../../ref}}"/>
 							{{/if}}
 						{{/compare}}
 					{{/compare}}
@@ -140,7 +140,7 @@
 	<div class="col-md-12">
 		<h4>Extra query string</h4>
 		<div class="form-group">
-			<input type="text" class="form-control" id="extraQueryString" name="extraQueryString" placeholder="optional" data-parameter-type="extra-query-string"/>
+			<input type="text" class="form-control parameter-field" id="extraQueryString" name="extraQueryString" placeholder="optional" data-parameter-type="extra-query-string" data-method-ref="{{../../ref}}"/>
 		</div>
 	</div>
 	{{/if}}
@@ -150,6 +150,7 @@
 			<h4>Request Body</h4>
 			<div>
 			<textarea class="form-control" id="inputJson" rows=10 />
+			
 			</div>
 			<div style="margin-top:10px;">
 				<button class="btn btn-xs btn-primary copy-button" data-source-id="inputJson" data-feedback-id="inputJson-copy-success">

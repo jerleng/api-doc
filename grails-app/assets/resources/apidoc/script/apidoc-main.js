@@ -344,6 +344,7 @@ function buildTestContent(method) {
 	try {
 		for (var i = 0; i < localStorage.length; i++){
 			var k = localStorage.key(i);
+			console.log('Looking at '+k+' comparing to '+method.ref);
 			if (k.indexOf(method.ref) == 0 || k.indexOf('~~') == 0) {
 				var keyParts = k.split('|'),
 					m = keyParts[0],
@@ -351,10 +352,10 @@ function buildTestContent(method) {
 					t = keyParts[2]
 					s = 'input[name="'+n+'"]',
 					v = localStorage.getItem(k);
-				//console.log('Looking at '+k);
+				console.log('Found '+v);
 				if (m != '~~') s += '[data-method-ref="'+m+'"]';
 				if (t != '~~') s += '[data-parameter-type="'+t+'"]';
-				//console.log('selecting '+s);
+				console.log('selecting '+s);
 				$(s).val(v);
 			}
 		}
@@ -399,7 +400,7 @@ function buildTestContent(method) {
 		var tempReplacedPath = replacedPath; // this is to handle more than one parameter on the url
 		
 		var validationErrors = [];
-		$('#validationererrors').hide();
+		$('#validationerrors').hide();
 		$('#validationerrors ul').empty();
 		
 		$("#pathparameters input").each(function() {
